@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "gerp-operator": {
+      "command": "go",
+      "args": ["run", "./cmd/mcp/main.go"],
+      "env": {
+        "GERP_GRAPHQL_ENDPOINT": "http://localhost:8080/query"
+      }
+    }
+  }
+}
