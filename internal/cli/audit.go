@@ -32,7 +32,7 @@ var viewCmd = &cobra.Command{
 		defer client.Close()
 
 		stmt := spanner.Statement{
-			SQL: `SELECT ID, ActorID, Action, OldState, NewState, CreatedAt 
+			SQL: `SELECT ID, ActorID, Action, AuditTimestamp 
 			      FROM ComplianceAudits 
 			      WHERE TargetRecordID = @record_id`,
 			Params: map[string]interface{}{
@@ -60,10 +60,9 @@ var viewCmd = &cobra.Command{
 			found = true
 			
 			var id, actorID, action string
-			var oldState, newState spanner.NullString
-			var createdAt spanner.NullTime
+			var auditTimestamp spanner.NullTime
 
-			if err := row.Columns(&id, &actorID, &action, &oldState, &newState, &createdAt); err != nil {
+			if err := row.Columns(&id, &actorID, &action, &auditTimestamp); err != nil {
 				fmt.Println("🚨 Error mapping compliance row:", err)
 				continue
 			}
@@ -71,7 +70,7 @@ var viewCmd = &cobra.Command{
 			fmt.Printf("Audit ID:   %s\n", id)
 			fmt.Printf("Action:     %s\n", action)
 			fmt.Printf("Actor:      %s\n", actorID)
-			fmt.Printf("Timestamp:  %v\n", createdAt.Time)
+			fmt.Printf("Timestamp:  %v\n", auditTimestamp.Time)
 			fmt.Println("--------------------------------------------------")
 		}
 
