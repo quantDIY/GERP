@@ -1,4 +1,4 @@
-# 🌐 GERP (Google-Grade Enterprise Resource Planning)
+# 🌐 GERP (Google-Enterprise Resource Planning)
 
 ![Go Version](https://img.shields.io/badge/Go-1.21-00ADD8?style=for-the-badge&logo=go)
 ![Cloud Spanner](https://img.shields.io/badge/Google_Cloud-Spanner-4285F4?style=for-the-badge&logo=googlecloud)
