@@ -6,6 +6,7 @@ require (
 	cloud.google.com/go/spanner v1.88.0
 	github.com/99designs/gqlgen v0.17.89
 	github.com/google/uuid v1.6.0
+	github.com/vektah/gqlparser/v2 v2.5.32
 	go.temporal.io/sdk v1.41.1
 	google.golang.org/api v0.273.0
 )
@@ -48,7 +49,6 @@ require (
 	github.com/spiffe/go-spiffe/v2 v2.6.0 // indirect
 	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/stretchr/testify v1.11.1 // indirect
-	github.com/vektah/gqlparser/v2 v2.5.32 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/contrib/detectors/gcp v1.39.0 // indirect
