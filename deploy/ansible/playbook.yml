@@ -1,0 +1,48 @@
+# deploy/ansible/playbook.yml
+---
+- name: GERP Matrix Deployment
+  hosts: gerp_production_nodes
+  become: yes
+  tasks:
+    - name: Ensure Docker Runtime is Provisioned
+      ansible.builtin.package:
+        name: docker
+        state: present
+
+    - name: Ensure Docker Daemon is Active
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Pull GERP Gateway Matrix Image
+      community.docker.docker_image:
+        name: registry.gerp.internal/gerp-gateway:latest
+        source: pull
+
+    - name: Pull GERP Pipeline Worker Image
+      community.docker.docker_image:
+        name: registry.gerp.internal/gerp-worker:latest
+        source: pull
+
+    - name: Boot GraphQL Gateway Executor
+      community.docker.docker_container:
+        name: gerp-gateway
+        image: registry.gerp.internal/gerp-gateway:latest
+        state: started
+        recreate: yes
+        ports:
+          - "8080:8080"
+        env:
+          SPANNER_DATABASE: "projects/gerp-production/instances/gerp-prod-instance/databases/gerp-prod-db"
+          TEMPORAL_HOST_PORT: "temporal.production.cluster:7233"
+
+    - name: Boot Temporal Orchestrator Saga Worker
+      community.docker.docker_container:
+        name: gerp-worker
+        image: registry.gerp.internal/gerp-worker:latest
+        state: started
+        recreate: yes
+        env:
+          SPANNER_DATABASE: "projects/gerp-production/instances/gerp-prod-instance/databases/gerp-prod-db"
+          TEMPORAL_HOST_PORT: "temporal.production.cluster:7233"
