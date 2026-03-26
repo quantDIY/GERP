@@ -6,7 +6,7 @@
 ![GraphQL](https://img.shields.io/badge/GraphQL-BFF-E10098?style=for-the-badge&logo=graphql)
 ![MCP](https://img.shields.io/badge/MCP-AI_Ready-FF7C00?style=for-the-badge)
 
-**GERP** is a FAANG-grade, multi-domain Enterprise Resource Planning (ERP) matrix. Built entirely through an autonomous AI Swarm orchestrated by a Chief Architect, GERP demonstrates how to scale massive distributed data systems using absolute Domain-Driven Design (DDD), cross-domain Temporal Sagas, and zero SQL foreign keys.
+**GERP** is a FAANG-grade, multi-domain Enterprise Resource Planning (ERP) matrix. GERP demonstrates how to scale massive distributed data systems using absolute Domain-Driven Design (DDD), cross-domain Temporal Sagas, and zero SQL foreign keys.
 
 This is not just an ERP. It is a self-aware corporate engine exposed natively to AI agents via the Model Context Protocol (MCP).
 
