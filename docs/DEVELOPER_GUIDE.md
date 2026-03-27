@@ -43,3 +43,26 @@ GERP utilizes mathematically reproducible cloud infrastructure and secure contai
 GERP exposes FAANG-grade capabilities autonomously to outside LLMs via standard JSON-RPC STDIO built off the Model Context Protocol.
 
 The `cmd/mcp` Server binds to AI agents running on Cursor IDE, Claude Desktop, or centralized orchestration engines via `.cursor/mcp.json`. Agents inherently use the physical tools (`gerp_status`, `gerp_create_order`, `gerp_audit_view`) to mechanically command the Spanner databases and trigger automated Temporal subroutines strictly adhering to the `internal/cli` environmental scope bindings.
+
+## 8. COAMS (Content Operating and Management System)
+
+COAMS represents the eighth primary domain of GERP, specifically architected as a Markdown-Native, AI-First content platform. Traditional headless CMS patterns relying on complex graphical JSON/ASTs have been discarded in favor of raw Markdown, natively optimizing it for AI integration.
+
+### Core Architecture & The "Ignorant Engine"
+- **Isolated AlloyDB Sharding:** Unlike 
+the core Spanner nodes, COAMS stores vector embeddings via AlloyDB using PostgreSQL's `pgvector` paired with Declarative Partitioning (`PARTITION BY LIST`). Data is physically separated by `channel_id` (e.g., engineering, hr) ensuring Zero-Leak Architecture.
+- **Microsecond Graph Linking:** The `doc:uuid` pointers are validated mathematically before writing by the **Agent-Index**. The system outright rejects writes if an internal link points to a non-existent or unauthorized document.
+
+### System Integration & The Publish Saga
+The COAMS ingestion logic lives entirely within the temporal queues (`internal/pipeline/coams_publish_saga.go`). Executing `gerp coams sync ./docs` triggers:
+1. Pure Go Goldmark AST markdown parsing.
+2. Link Integrity Verification.
+3. Vertex AI Vector Embeddings generation.
+4. Partitioned AlloyDB storage.
+5. Dynamic broadcast update of the GraphQL schema ensuring immediate downstream synchronization.
+
+### Bootstrapping the QuanuX Knowledge Vector
+By design, COAMS is self-documenting. To understand the operational footprint of the system, any AI agent or Operator can directly consult the embedded `SKILL.md` file:
+[Consult the COAMS SKILL.md Here](file:///Users/Duncan/GERP/internal/coams/docs/SKILL.md)
+
+Additionally, COAMS autonomously generates manual pages for CLI execution utilizing the `gerp coams gen-man` control hook. This fundamentally ensures that agents never suffer from blank-page syndrome when learning how to navigate the repository layer.

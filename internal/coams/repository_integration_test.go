@@ -3,7 +3,6 @@
 package coams_test
 
 import (
-	"context"
 	"os"
 	"testing"
 )
